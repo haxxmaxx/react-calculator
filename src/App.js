@@ -71,6 +71,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>MATRIX CALCULATOR</h1>
         <div className="outputWindow">
           {this.state.isEvaluated ? this.state.answer : this.state.expression}
         </div>
