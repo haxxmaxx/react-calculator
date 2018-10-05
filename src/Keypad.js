@@ -12,17 +12,24 @@ const keyValues = [
 export class Key extends Component {
   render() {
     return (
-      <button className="box" onClick={ () => this.props.onClick(this.props.value) }>{ this.props.value }</button>
+      <button className="box" onClick={ () => this.props.onClick(this.props.value) }>
+        { this.props.value }
+      </button>
     );
   }
 }
 
 export class Keypad extends Component {
   render() {
-    let keyElementArray = []
+    let keyElementArray = [];
+
     for (var i = 0; i < 20; ++i) {
       keyElementArray.push(
-      <Key key={'key-' + i} value={ keyValues[i] } onClick={ (keyValue) => this.props.onClick(keyValue) } />);
+      <Key
+        key={'key-' + i}
+        value={ keyValues[i] }
+        onClick={ (keyValue) => this.props.onClick(keyValue) }
+      />);
     } 
 
     return (
@@ -37,9 +44,7 @@ export class Keypad extends Component {
         <br/>
         {keyElementArray.slice(16,20)}
         <br/>
-
       </div>
-      
     );
   }
 }

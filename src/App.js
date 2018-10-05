@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import { Keypad } from './Keypad';
 import './App.css';
-
-
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       answer: '',
       expression: '',
       isEvaluated: false
     }
-    this.handleClick = this.handleClick.bind(this);
-
   }
 
   handleClick(keyValue) {
@@ -23,7 +19,11 @@ class App extends Component {
         let result;
 
         try {
-          result = eval(this.state.expression);
+          if (this.state.expression === '0/0') {
+            result = 'creating black hole...'
+          } else {
+            result = eval(this.state.expression);
+          }
         } catch (error) {
           result = 'SYNTAX ERROR';
         }
@@ -33,6 +33,7 @@ class App extends Component {
           expression: '',
           answer: result
         });
+
         break;
 
       case 'AC':
@@ -40,6 +41,7 @@ class App extends Component {
           isEvaluated: false,
           expression: ''
         });
+
         break;
 
       case 'ans':
@@ -57,6 +59,7 @@ class App extends Component {
           isEvaluated: false,
           expression: this.state.expression + '*'
         });
+
         break;
     
       default:
@@ -64,6 +67,7 @@ class App extends Component {
           isEvaluated: false,
           expression: this.state.expression + keyValue
         });
+
         break;
     }
   }
@@ -73,10 +77,9 @@ class App extends Component {
       <div className="App">
         <h1>MATRIX CALCULATOR</h1>
         <div className="outputWindow">
-          {this.state.isEvaluated ? this.state.answer : this.state.expression}
+          { this.state.isEvaluated ? this.state.answer : this.state.expression }
         </div>
-        <Keypad onClick={(keyValue) => this.handleClick(keyValue)} />
-        <br/>
+        <Keypad onClick={ (keyValue) => this.handleClick(keyValue) } />
       </div>
     );
   }
